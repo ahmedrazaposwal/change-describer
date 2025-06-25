@@ -20,10 +20,12 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 
 			const diff = stdout;
+			
+			const config = vscode.workspace.getConfiguration('arpdodo');
+			const apiKey = config.get<string>('apiKey');
 
-			const apiKey = "api_REPLACE_xjkdhjshd";
-			if (!apiKey || apiKey.startsWith("api_REPLACE")) {
-				vscode.window.showErrorMessage("Set your api key");
+			if (!apiKey || apiKey.startsWith('api_REPLACE')) {
+				vscode.window.showErrorMessage('Please Set your OpenAI API key!');
 				return;
 			}
 
@@ -41,7 +43,6 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 	context.subscriptions.push(disposable);
 }
-
 
 async function askOpenAI(diff:string, apiKey:string): Promise<string> {
 	const response = await axios.post(
@@ -61,7 +62,7 @@ async function askOpenAI(diff:string, apiKey:string): Promise<string> {
 		},
 		{
 			headers: {
-				Authorization: `Brearer ${apiKey}`
+				Authorization: `Bearer ${apiKey}`
 			}
 		}
 	);

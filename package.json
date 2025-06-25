@@ -17,7 +17,17 @@
         "command": "arpdodo.describeChanges",
         "title": "Describe Recent Code Changes"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Change Describer",
+      "properties": {
+        "arpdodo.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your OpenAI API key (kept locally, not committed)"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
